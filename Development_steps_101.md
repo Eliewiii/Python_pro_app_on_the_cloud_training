@@ -92,3 +92,13 @@ Keeping the repository clean and recovering from mistakes.
 | `git rm -r --cached .` | Clears the git cache (useful if you updated `.gitignore`). |
 | `git checkout -- <file>` | Discards local changes to a file and restores it. |
 | `git stash` | Temporarily "hides" uncommitted changes to switch branches quickly. |
+
+
+
+### Ruff
+
+To Check: `ruff check .` — This lists all linting violations in your project.  
+
+To Fix: `ruff check --fix .` — This automatically fixes "safe" errors, like unused imports or incorrectly ordered ones.  
+
+To Format: `ruff format .` — This reformats your spacing and line lengths to match your 100-character rule.
