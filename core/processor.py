@@ -2,12 +2,12 @@
 FileProcessor class, sample class to sum numbers in a text file.
 """
 
-from typing import Final
-from pathlib import Path
 import logging
+import re
 from contextlib import contextmanager
 from contextvars import ContextVar
-import re
+from pathlib import Path
+from typing import Final
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +23,6 @@ class FileProcessor:
     # Context variable to trigger warning only once
     _warned_var: ContextVar[bool] = ContextVar("warned_var", default=False)
 
-    # --- 2. LIFECYCLE & INFRASTRUCTURE ---
     @classmethod
     @contextmanager
     def session(cls):
@@ -37,7 +36,6 @@ class FileProcessor:
         finally:
             cls._warned_var.reset(token)
 
-    # --- 3. PUBLIC API ---
     @classmethod
     def sum_file(cls, file_path: Path, ignore_invalid: bool = True) -> float:
         """
@@ -74,7 +72,6 @@ class FileProcessor:
 
         return total
 
-    # --- 4. INTERNAL HELPERS ---
     @classmethod
     def _ensure_valid_path_and_extension(cls, file_path: Path):
         """
@@ -91,7 +88,7 @@ class FileProcessor:
             raise FileNotFoundError(f"File not found: {file_path}")
         if file_path.suffix.lower() not in cls._SUPPORTED_EXT:
             raise ValueError(
-                f"Unsupported extension '{file_path.suffix}'. " f"Supported: {cls._SUPPORTED_EXT}"
+                f"Unsupported extension '{file_path.suffix}'. Supported: {cls._SUPPORTED_EXT}"
             )
 
     @classmethod
@@ -116,8 +113,7 @@ class FileProcessor:
                 raise
 
             if not cls._warned_var.get():
-                logger.warning(f"Skipping invalid numeric data: {value}")
+                logger.warning("The file contains invalid numeric data. These will be skipped")
                 cls._warned_var.set(True)
-            else:
-                logger.warning(f"Skipping additional invalid entry: {value}")
+
             return 0.0

@@ -1,0 +1,7 @@
+# Web Layer
+fastapi ~= 0.110.0
+uvicorn ~= 0.29.0
+
+# Testing & Linting (Development)
+pytest ~= 8.1.0
+ruff ~= 0.3.0
