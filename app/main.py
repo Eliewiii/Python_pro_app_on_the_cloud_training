@@ -4,7 +4,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 
-from core.processor import FileProcessor
+from core import FileProcessor, __version__
 
 # 1. Initialize the App
 app = FastAPI(title="Algorithm R&D API")
@@ -60,4 +60,4 @@ async def sum_file(request: FileProcessorRequest):
 
 @app.get("/health")
 async def health_check():
-    return {"status": "online", "version": "1.0.0"}
+    return {"status": "online", "version": __version__}
