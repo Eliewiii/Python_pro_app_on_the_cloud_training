@@ -68,6 +68,7 @@ Essential for R&D. Never work directly on `main` when experimenting with new alg
 | `git branch` | Lists all local branches. |
 | `git checkout main` | Switches back to your stable production branch. |
 | `git merge <branch_name>` | Merges the completed feature back into your main code. |
+| `git branch -d branch_name` | Delete a branch |
 
 ---
 
